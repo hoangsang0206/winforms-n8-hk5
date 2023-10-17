@@ -10,8 +10,8 @@ namespace DoAn_Nhom10
 {
     class DBConnect
     {
-        private static string connectString = "Data Source = AORUS-LAPTOP; Initial Catalog = QLCH; User ID = sa; Password = 123";
-        private SqlConnection sqlConnect = new SqlConnection();
+        private static string connectString = "Data Source = AORUS-LAPTOP; Initial Catalog = QLCH_Nhom10; User ID = sa; Password = S@ng0356493696";
+        private SqlConnection sqlConnect;
 
         //Khởi tạo
         public DBConnect()
@@ -57,6 +57,29 @@ namespace DoAn_Nhom10
             int result = (int)cmd.ExecuteScalar();
 
             Close();
+            return result;
+        }
+
+        //--
+        public DataTable getDataTable(string sqlQuery)
+        {
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(sqlQuery, sqlConnect);
+
+            da.Fill(dt);
+
+            return dt;
+        }
+
+
+        //--
+        public int updateDataTable(DataTable dt, string str)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(str, sqlConnect);
+            SqlCommandBuilder cb = new SqlCommandBuilder(da);
+
+            int result = da.Update(dt);          
+
             return result;
         }
     }
