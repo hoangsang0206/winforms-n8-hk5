@@ -66,7 +66,7 @@
             this.panelSidebar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelSidebar.Name = "panelSidebar";
             this.panelSidebar.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
-            this.panelSidebar.Size = new System.Drawing.Size(239, 844);
+            this.panelSidebar.Size = new System.Drawing.Size(239, 865);
             this.panelSidebar.TabIndex = 0;
             // 
             // panel4
@@ -74,7 +74,7 @@
             this.panel4.Controls.Add(this.btnLogout);
             this.panel4.Controls.Add(this.iconUser);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(4, 711);
+            this.panel4.Location = new System.Drawing.Point(4, 732);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(235, 133);
             this.panel4.TabIndex = 5;
@@ -245,7 +245,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(239, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1187, 66);
+            this.panel1.Size = new System.Drawing.Size(1199, 66);
             this.panel1.TabIndex = 1;
             // 
             // titleLabel
@@ -279,7 +279,8 @@
             this.panelChildForm.Font = new System.Drawing.Font("Segoe UI", 10.01739F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelChildForm.Location = new System.Drawing.Point(239, 69);
             this.panelChildForm.Name = "panelChildForm";
-            this.panelChildForm.Size = new System.Drawing.Size(1187, 775);
+            this.panelChildForm.Padding = new System.Windows.Forms.Padding(10);
+            this.panelChildForm.Size = new System.Drawing.Size(1199, 796);
             this.panelChildForm.TabIndex = 2;
             // 
             // panel3
@@ -288,7 +289,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(239, 66);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1187, 3);
+            this.panel3.Size = new System.Drawing.Size(1199, 3);
             this.panel3.TabIndex = 3;
             // 
             // frmQL
@@ -296,7 +297,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1426, 844);
+            this.ClientSize = new System.Drawing.Size(1438, 865);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panelChildForm);
             this.Controls.Add(this.panel1);
@@ -306,6 +307,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmQL";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý cửa hàng quần áo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmQL_FormClosing);
             this.Load += new System.EventHandler(this.frmQL_Load);

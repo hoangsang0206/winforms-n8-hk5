@@ -60,6 +60,7 @@ namespace DoAn_Nhom10.Forms
         private void CategoriesForm_Load(object sender, EventArgs e)
         {
             loadCategories();
+            txtCategoryID.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
         }
 
         //--Kiểm tra xem danh mục có chứa sản phẩm không
@@ -105,25 +106,32 @@ namespace DoAn_Nhom10.Forms
                 return;
             }
 
-            DataRow row = dt.Rows.Find(txtCategoryID.Text);
-            if (row != null)
+            DialogResult r = MessageBox.Show("Xóa danh mục này?", "Xóa danh mục", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (r == DialogResult.Yes)
             {
-                row.Delete();
-            }
-            else {
-                return;
-            }
+                DataRow row = dt.Rows.Find(txtCategoryID.Text);
+                if (row != null)
+                {
+                    row.Delete();
+                }
+                else
+                {
+                    return;
+                }
 
-            string sqlQuery = "Select * From Categories";
-            int result = dbConnect.updateDataTable(dt, sqlQuery);
+                string sqlQuery = "Select * From Categories";
+                int result = dbConnect.updateDataTable(dt, sqlQuery);
 
-            if (result < 1)
-            {
-                MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (result < 1)
+                {
+                    MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                loadCategories();
             }
-
-            loadCategories();
+           
         }
 
         //Thêm danh mục----------------------------
@@ -197,7 +205,6 @@ namespace DoAn_Nhom10.Forms
         {
             loadCategories();
         }
-
 
     }
 }

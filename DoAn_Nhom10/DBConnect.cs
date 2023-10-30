@@ -10,7 +10,7 @@ namespace DoAn_Nhom10
 {
     class DBConnect
     {
-        private static string connectString = "Data Source = AORUS-LAPTOP; Initial Catalog = QLCH_Nhom10; User ID = sa; Password = 123";
+        private static string connectString = "Data Source = AORUS-LAPTOP; Initial Catalog = QLCH_Nhom10; User ID = sa; Password = S@ng0356493696";
         private SqlConnection sqlConnect;
 
         //Khởi tạo
