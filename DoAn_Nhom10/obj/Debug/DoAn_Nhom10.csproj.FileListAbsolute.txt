@@ -13,3 +13,9 @@ D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.Properti
 D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.csproj.GenerateResource.Cache
 D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.exe
 D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.pdb
+D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.csprojResolveAssemblyReference.cache
+D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.Forms.AddProductsForm.resources
+D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.BrandsForm.resources
+D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.Forms.AddOrderForm.resources
+D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.Forms.CustomersForm.resources
+D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.Forms.EmployeesForm.resources

@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace DoAn_Nhom10.Forms
 {
-    public partial class OrdersForm : Form
+    public partial class CustomersForm : Form
     {
-        public OrdersForm()
+        public CustomersForm()
         {
             InitializeComponent();
-        }
-
-        private void btnCreate_Click(object sender, EventArgs e)
-        {
-            AddOrderForm addOrderForm = new AddOrderForm();
-            addOrderForm.Show();
         }
     }
 }

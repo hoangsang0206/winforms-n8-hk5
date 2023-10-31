@@ -105,53 +105,6 @@ namespace DoAn_Nhom10.Forms
             return false;
         }
 
-        //Thêm sản phẩm ------------------
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (txtProductID.Text.Length <= 0 || txtProductName.Text.Length <= 0 || txtPrice.Text.Length <= 0)
-            {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (checkProductExist(txtProductID.Text))
-            {
-                MessageBox.Show("Sản phẩm này đã tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-
-            DataRow newRow = dt_product.NewRow();
-            DataRow lastRow;
-
-            if (dt_product.Rows.Count > 0)
-            {
-                lastRow = dt_product.Rows[dt_product.Rows.Count - 1];
-                newRow["ProductID"] = (int)lastRow["ProductID"] + 1;
-            }
-            else
-            {
-                newRow["ProductID"] = 1;
-            }
-
-            newRow["ProductName"] = txtProductName.Text;
-            newRow["Price"] = txtPrice.Text;
-            newRow["CateID"] = cbboxCategories.SelectedValue;
-            newRow["BrandID"] = cbboxBrands.SelectedValue;
-
-            dt_product.Rows.Add(newRow);
-
-            string sqlQuery = "Select * From Products";
-            int result = dbConnect.updateDataTable(dt_product, sqlQuery);
-
-            if (result < 1)
-            {
-                MessageBox.Show("Không thể thêm mới.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            loadProducts();
-        }
-
         //Xóa sản phẩm ---------------------------
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -167,31 +120,31 @@ namespace DoAn_Nhom10.Forms
                 return;
             }
 
-            DataRow row = dt_product.Rows.Find(txtProductID.Text);
-            if (row != null)
+            DialogResult r = MessageBox.Show("Xóa sản phẩm này?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (r == DialogResult.Yes)
             {
-                row.Delete();
-            }
-            else
-            {
-                return;
-            }
+                DataRow row = dt_product.Rows.Find(txtProductID.Text);
+                if (row != null)
+                {
+                    row.Delete();
+                }
+                else
+                {
+                    return;
+                }
 
-            string sqlQuery = "Select * From Products";
-            int result = dbConnect.updateDataTable(dt_product, sqlQuery);
+                string sqlQuery = "Select * From Products";
+                int result = dbConnect.updateDataTable(dt_product, sqlQuery);
 
-            if (result < 1)
-            {
-                MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                if (result < 1)
+                {
+                    MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-            loadProducts();
-        }
-
-        private void btnReload_Click(object sender, EventArgs e)
-        {
-            loadProducts();
+                loadProducts();
+            }  
         }
 
         //Sửa -------------------------

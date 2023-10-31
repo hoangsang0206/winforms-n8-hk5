@@ -134,11 +134,34 @@ namespace DoAn_Nhom10
             ActiveBtn(sender, Colors.color3);
             OpenChildForm(new ProductsForm());
         }
-
         private void btnOrders_Click(object sender, EventArgs e)
         {
             ActiveBtn(sender, Colors.color4);
             OpenChildForm(new OrdersForm());
+        }
+
+        private void btnBrands_Click(object sender, EventArgs e)
+        {
+            ActiveBtn(sender, Colors.color5);
+            OpenChildForm(new BrandsForm());
+        }
+
+        private void btnImportProducts_Click(object sender, EventArgs e)
+        {
+            ActiveBtn(sender, Colors.color6);
+            OpenChildForm(new AddProductsForm());
+        }
+
+        private void btnCustomers_Click(object sender, EventArgs e)
+        {
+            ActiveBtn(sender, Colors.color1);
+            OpenChildForm(new CustomersForm());
+        }
+
+        private void btnEmployees_Click(object sender, EventArgs e)
+        {
+            ActiveBtn(sender, Colors.color2);
+            OpenChildForm(new EmployeesForm());
         }
 
         private void frmQL_Load(object sender, EventArgs e)
@@ -155,6 +178,5 @@ namespace DoAn_Nhom10
 
             login.Show();
         }
-
     }
 }

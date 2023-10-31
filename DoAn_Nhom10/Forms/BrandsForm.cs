@@ -8,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DoAn_Nhom10.Forms
+namespace DoAn_Nhom10
 {
-    public partial class OrdersForm : Form
+    public partial class BrandsForm : Form
     {
-        public OrdersForm()
+        public BrandsForm()
         {
             InitializeComponent();
-        }
-
-        private void btnCreate_Click(object sender, EventArgs e)
-        {
-            AddOrderForm addOrderForm = new AddOrderForm();
-            addOrderForm.Show();
         }
     }
 }
