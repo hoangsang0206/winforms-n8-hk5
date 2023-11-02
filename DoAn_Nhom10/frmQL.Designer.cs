@@ -79,6 +79,7 @@
             // 
             // btnEmployees
             // 
+            this.btnEmployees.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEmployees.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnEmployees.FlatAppearance.BorderSize = 0;
             this.btnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -99,6 +100,7 @@
             // 
             // btnCustomers
             // 
+            this.btnCustomers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCustomers.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnCustomers.FlatAppearance.BorderSize = 0;
             this.btnCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
