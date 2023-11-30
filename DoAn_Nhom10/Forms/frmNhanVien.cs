@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DoAn_Nhom10.Forms
 {
-    public partial class DashboardForm : Form
+    public partial class frmNhanVien : Form
     {
-        public DashboardForm()
+        public frmNhanVien()
         {
             InitializeComponent();
         }

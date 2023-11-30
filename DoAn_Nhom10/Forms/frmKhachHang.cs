@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DoAn_Nhom10.Forms
 {
-    public partial class EmployeesForm : Form
+    public partial class frmKhachHang : Form
     {
-        public EmployeesForm()
+        public frmKhachHang()
         {
             InitializeComponent();
         }

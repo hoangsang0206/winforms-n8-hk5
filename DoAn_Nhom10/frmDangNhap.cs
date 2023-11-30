@@ -10,22 +10,26 @@ using System.Windows.Forms;
 
 namespace DoAn_Nhom10
 {
-    public partial class frmLogin : Form
+    public partial class frmDangNhap : Form
     {
-        Account adminAccount = new Account();
-        public frmLogin()
+        DBConnect dbConnect = new DBConnect();
+        DataTable dt = new DataTable();
+        public frmDangNhap()
         {
             InitializeComponent();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text;
+            string username = txtUserName.Text;
             string password = txtPassword.Text;
 
-            if (username == adminAccount.Username && password == adminAccount.Password)
-            {
+            string sql = "Select TOP 1 * From NhanVien Where TaiKhoan = '" + username + "' And MatKhau = '" + password + "'";
+            dt = dbConnect.getDataTable(sql);
 
+            if (dt.Rows.Count > 0 && (username == dt.Rows[0]["TaiKhoan"].ToString() && password == dt.Rows[0]["MatKhau"].ToString()))
+            {
+                UserLogged.dtUser = dt;
                 frmQL frm = new frmQL();
                 frm.Show();
 
@@ -43,6 +47,11 @@ namespace DoAn_Nhom10
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnLeave_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

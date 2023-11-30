@@ -1,6 +1,6 @@
 ﻿namespace DoAn_Nhom10.Forms
 {
-    partial class CustomersForm
+    partial class frmKhachHang
     {
         /// <summary>
         /// Required designer variable.

@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace DoAn_Nhom10.Forms
 {
-    public partial class CategoriesForm : Form
+    public partial class frmDanhMuc : Form
     {
         DBConnect dbConnect = new DBConnect();
         DataTable dt;
         DataColumn[] key = new DataColumn[1];
 
-        public CategoriesForm()
+        public frmDanhMuc()
         {
             InitializeComponent();
         }
@@ -28,16 +28,16 @@ namespace DoAn_Nhom10.Forms
             txtCategoryID.DataBindings.Clear();
             txtCategoryName.DataBindings.Clear();
 
-            txtCategoryID.DataBindings.Add("Text", dt, "CateID");
-            txtCategoryName.DataBindings.Add("Text", dt, "CateName");
+            txtCategoryID.DataBindings.Add("Text", dt, "MaDM");
+            txtCategoryName.DataBindings.Add("Text", dt, "TenDM");
         }
 
         //Load danh mục
         private void loadCategories()
         {
-            string sqlQuery = "Select Categories.CateID, CateName, Count(Products.ProductID) As ProductCount From Categories " +
-                              "Left Join Products ON Categories.CateID = Products.CateID " +
-                              "Group By Categories.CateID, CateName";
+            string sqlQuery = "Select DanhMuc.MaDM, TenDM, Count(SanPham.MaSP) As DemSP From DanhMuc " +
+                              "Left Join SanPham ON DanhMuc.MaDM = SanPham.MaDM " +
+                              "Group By DanhMuc.MaDM, TenDM";
 
 
             dt = dbConnect.getDataTable(sqlQuery);
@@ -45,28 +45,18 @@ namespace DoAn_Nhom10.Forms
             dataBinding(dt);
             key[0] = dt.Columns[0];
             dt.PrimaryKey = key;
-
-            //-------------------
-            int stt = 1;
-            foreach (DataGridViewRow row in dgvCategories.Rows)
-            {
-                row.Cells["STT"].Value = stt;
-                stt++;
-            }
-
         }
         
         //------------------
         private void CategoriesForm_Load(object sender, EventArgs e)
         {
             loadCategories();
-            txtCategoryID.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
         }
 
         //--Kiểm tra xem danh mục có chứa sản phẩm không
         private bool checkProductInCategory(string cateID)
         {
-            string sqlQuery = "Select Count(*) From Products Where CateID = '" +cateID+ "'";
+            string sqlQuery = "Select Count(*) From SanPham Where MaDM = '" +cateID+ "'";
 
             int result = dbConnect.getScalar(sqlQuery);
             
@@ -80,7 +70,7 @@ namespace DoAn_Nhom10.Forms
         //--Kiểm tra xem danh mục đã tồn tại chưa
         private bool checkCateExist(string cateID)
         {
-            string sqlQuery = "Select Count(*) From Categories Where CateID = '" +cateID+ "'";
+            string sqlQuery = "Select Count(*) From DanhMuc Where MaDM = '" +cateID+ "'";
 
             int result = dbConnect.getScalar(sqlQuery);
 
@@ -110,25 +100,16 @@ namespace DoAn_Nhom10.Forms
 
             if (r == DialogResult.Yes)
             {
-                DataRow row = dt.Rows.Find(txtCategoryID.Text);
-                if (row != null)
+                string sql = "Delete From DanhMuc Where MaDM = '" + txtCategoryID.Text + "'";
+                int result = dbConnect.getNonQuery(sql);
+                if (result != 1)
                 {
-                    row.Delete();
+                    MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    return;
+                    MessageBox.Show("Xóa thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                string sqlQuery = "Select * From Categories";
-                int result = dbConnect.updateDataTable(dt, sqlQuery);
-
-                if (result < 1)
-                {
-                    MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
                 loadCategories();
             }
            
@@ -150,15 +131,15 @@ namespace DoAn_Nhom10.Forms
             }
 
             DataRow newRow = dt.NewRow();
-            newRow["CateID"] = txtCategoryID.Text;
-            newRow["CateName"] = txtCategoryName.Text;
+            newRow["MaDM"] = txtCategoryID.Text;
+            newRow["TenDM"] = txtCategoryName.Text;
 
             dt.Rows.Add(newRow);
 
-            string sqlQuery = "Select * From Categories";
+            string sqlQuery = "Select * From DanhMuc";
             int result = dbConnect.updateDataTable(dt, sqlQuery);
 
-            if (result < 1)
+            if (result != 1)
             {
                 MessageBox.Show("Không thể thêm mới.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -181,30 +162,14 @@ namespace DoAn_Nhom10.Forms
                 return;
             }
 
-            DataRow row = dt.Rows.Find(txtCategoryID.Text);
-            if (row != null)
-            {
-                row["CateName"] = txtCategoryName.Text;
-                
-            }
+            string sql = "Update DanhMuc Set TenDM = N'" + txtCategoryName.Text + "' Where MaDM = '" + txtCategoryID.Text + "'";
+            int result = dbConnect.getNonQuery(sql);
 
-            string sqlQuery = "Select * From Categories";
-
-            int result = dbConnect.updateDataTable(dt, sqlQuery);
-
-            if (result < 1)
+            if (result != 1)
             {
                 MessageBox.Show("Không thể sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
             loadCategories();
         }
-
-        private void btnReload_Click(object sender, EventArgs e)
-        {
-            loadCategories();
-        }
-
     }
 }

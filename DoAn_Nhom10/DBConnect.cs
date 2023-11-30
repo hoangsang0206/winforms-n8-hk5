@@ -10,7 +10,7 @@ namespace DoAn_Nhom10
 {
     class DBConnect
     {
-        private static string connectString = "Data Source = AORUS-LAPTOP; Initial Catalog = QLCH_Nhom10; User ID = sa; Password = S@ng0356493696";
+        private static string connectString = @"Data Source = AORUS-LAPTOP; Initial Catalog = QLCH_dotNet_N8; Integrated Security = True";
         private SqlConnection sqlConnect;
 
         //Khởi tạo
@@ -54,7 +54,19 @@ namespace DoAn_Nhom10
             Open();
             SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnect);
 
-            int result = (int)cmd.ExecuteScalar();
+            int result = Convert.ToInt32(cmd.ExecuteScalar());
+
+            Close();
+            return result;
+        }
+
+        //Chạy lệnh Select Sum()
+        public decimal getSum(string sqlQuery)
+        {
+            Open();
+            SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnect);
+
+            decimal result = Convert.ToDecimal(cmd.ExecuteScalar());
 
             Close();
             return result;

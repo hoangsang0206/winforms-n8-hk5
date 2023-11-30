@@ -14,6 +14,7 @@ namespace DoAn_Nhom10
 {
     public partial class frmQL : Form
     {
+        DataTable dtUser = UserLogged.dtUser;
         //-------------------
         private IconButton currentBtn;
         private Panel leftBorderBtn;
@@ -23,7 +24,7 @@ namespace DoAn_Nhom10
         {
             InitializeComponent();
             leftBorderBtn = new Panel();
-            leftBorderBtn.Size = new Size(7, 68);
+            leftBorderBtn.Size = new Size(7, 63);
             panelSidebar.Controls.Add(leftBorderBtn);
         }
 
@@ -120,63 +121,70 @@ namespace DoAn_Nhom10
         private void btnHome_Click(object sender, EventArgs e)
         {
             ActiveBtn(sender, Colors.color1);
-            OpenChildForm(new DashboardForm());
+            OpenChildForm(new frmTongQuan());
         }
 
         private void btnCategories_Click(object sender, EventArgs e)
         {
             ActiveBtn(sender, Colors.color2);
-            OpenChildForm(new CategoriesForm());
+            OpenChildForm(new frmDanhMuc());
         }
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
             ActiveBtn(sender, Colors.color3);
-            OpenChildForm(new ProductsForm());
+            OpenChildForm(new frmSanPham());
         }
         private void btnOrders_Click(object sender, EventArgs e)
         {
             ActiveBtn(sender, Colors.color4);
-            OpenChildForm(new OrdersForm());
-        }
-
-        private void btnBrands_Click(object sender, EventArgs e)
-        {
-            ActiveBtn(sender, Colors.color5);
-            OpenChildForm(new BrandsForm());
+            OpenChildForm(new frmDonHang());
         }
 
         private void btnImportProducts_Click(object sender, EventArgs e)
         {
             ActiveBtn(sender, Colors.color6);
-            OpenChildForm(new AddProductsForm());
+            OpenChildForm(new frmNhapHang());
         }
 
         private void btnCustomers_Click(object sender, EventArgs e)
         {
             ActiveBtn(sender, Colors.color1);
-            OpenChildForm(new CustomersForm());
+            OpenChildForm(new frmKhachHang());
         }
 
         private void btnEmployees_Click(object sender, EventArgs e)
         {
             ActiveBtn(sender, Colors.color2);
-            OpenChildForm(new EmployeesForm());
+            OpenChildForm(new frmNhanVien());
         }
 
         private void frmQL_Load(object sender, EventArgs e)
         {
-            iconUser.Text = "Admin";
-            ActiveBtn((IconButton)btnHome, Colors.color1);
-            OpenChildForm(new DashboardForm());
+            if (dtUser != null)
+            {
+                iconUser.Text = dtUser.Rows[0]["TenNV"].ToString();
+                ActiveBtn((IconButton)btnHome, Colors.color1);
+                OpenChildForm(new frmTongQuan());
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            frmLogin login = new frmLogin();
+            dtUser = null;
+            frmDangNhap login = new frmDangNhap();
             this.Hide();
-
             login.Show();
+        }
+
+        private void frmQL_Shown(object sender, EventArgs e)
+        {
+            if (dtUser == null || dtUser.Rows.Count <= 0)
+            {
+                frmDangNhap login = new frmDangNhap();
+                this.Hide();
+                login.Show();
+            }
         }
     }
 }
