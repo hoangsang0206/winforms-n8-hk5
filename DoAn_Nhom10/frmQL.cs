@@ -24,7 +24,7 @@ namespace DoAn_Nhom10
         {
             InitializeComponent();
             leftBorderBtn = new Panel();
-            leftBorderBtn.Size = new Size(7, 63);
+            leftBorderBtn.Size = new Size(7, 55);
             panelSidebar.Controls.Add(leftBorderBtn);
         }
 

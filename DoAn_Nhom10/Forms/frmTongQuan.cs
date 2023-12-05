@@ -27,11 +27,11 @@ namespace DoAn_Nhom10.Forms
             string sql4 = "Select Count(*) From KhachHang";
             string sql5 = "Select Count(*) From NhanVien";
 
-            labelOrderCount.Text = dbConnect.getScalar(sql1).ToString();
-            labelTotalRevenue.Text = (dbConnect.getSum(sql2) / 1000000 ).ToString("#.##") + " triệu";
-            labelProductCount.Text = dbConnect.getScalar(sql3).ToString();
-            labelCusCount.Text = dbConnect.getScalar(sql4).ToString();
-            labelEmpCount.Text = dbConnect.getScalar(sql5).ToString();
+            labelTongDH.Text = dbConnect.getScalar(sql1).ToString();
+            labelTongDoanhThu.Text = (dbConnect.getSum(sql2) / 1000000 ).ToString("#.##") + " triệu";
+            labelTongSP.Text = dbConnect.getScalar(sql3).ToString();
+            labelTongKH.Text = dbConnect.getScalar(sql4).ToString();
+            labelTongNV.Text = dbConnect.getScalar(sql5).ToString();
         }
     }
 }

@@ -25,15 +25,15 @@ namespace DoAn_Nhom10.Forms
         //Data binding
         private void dataBinding(DataTable dt)
         {
-            txtCategoryID.DataBindings.Clear();
-            txtCategoryName.DataBindings.Clear();
+            txtMaDM.DataBindings.Clear();
+            txtTenDM.DataBindings.Clear();
 
-            txtCategoryID.DataBindings.Add("Text", dt, "MaDM");
-            txtCategoryName.DataBindings.Add("Text", dt, "TenDM");
+            txtMaDM.DataBindings.Add("Text", dt, "MaDM");
+            txtTenDM.DataBindings.Add("Text", dt, "TenDM");
         }
 
         //Load danh mục
-        private void loadCategories()
+        private void loadDanhMuc()
         {
             string sqlQuery = "Select DanhMuc.MaDM, TenDM, Count(SanPham.MaSP) As DemSP From DanhMuc " +
                               "Left Join SanPham ON DanhMuc.MaDM = SanPham.MaDM " +
@@ -41,26 +41,26 @@ namespace DoAn_Nhom10.Forms
 
 
             dt = dbConnect.getDataTable(sqlQuery);
-            dgvCategories.DataSource = dt;
+            dgvDanhMuc.DataSource = dt;
             dataBinding(dt);
             key[0] = dt.Columns[0];
             dt.PrimaryKey = key;
         }
         
         //------------------
-        private void CategoriesForm_Load(object sender, EventArgs e)
+        private void frmDanhMuc_Load(object sender, EventArgs e)
         {
-            loadCategories();
+            loadDanhMuc();
         }
 
         //--Kiểm tra xem danh mục có chứa sản phẩm không
-        private bool checkProductInCategory(string cateID)
+        private bool ktSanPhamTrongDM(string cateID)
         {
             string sqlQuery = "Select Count(*) From SanPham Where MaDM = '" +cateID+ "'";
 
             int result = dbConnect.getScalar(sqlQuery);
             
-            if(result != 0)
+            if(result > 0)
             {
                 return true;
             }
@@ -68,13 +68,13 @@ namespace DoAn_Nhom10.Forms
         }
 
         //--Kiểm tra xem danh mục đã tồn tại chưa
-        private bool checkCateExist(string cateID)
+        private bool ktDanhMucDaTonTai(string cateID)
         {
             string sqlQuery = "Select Count(*) From DanhMuc Where MaDM = '" +cateID+ "'";
 
             int result = dbConnect.getScalar(sqlQuery);
 
-            if (result != 0)
+            if (result > 0)
             {
                 return true;
             }
@@ -82,17 +82,11 @@ namespace DoAn_Nhom10.Forms
         }
 
         //Xóa danh mục----------------------------
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (txtCategoryID.Text.Length <= 0)
+            if (txtMaDM.Text.Length <= 0)
             {
-                MessageBox.Show("Vui lòng nhập mã danh mục muốn xóa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (checkCateExist(txtCategoryID.Text) == false)
-            {
-                MessageBox.Show("Danh mục này không tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vui lòng chọn danh mục muốn xóa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -100,76 +94,97 @@ namespace DoAn_Nhom10.Forms
 
             if (r == DialogResult.Yes)
             {
-                string sql = "Delete From DanhMuc Where MaDM = '" + txtCategoryID.Text + "'";
-                int result = dbConnect.getNonQuery(sql);
-                if (result != 1)
+                DataRow row = dt.Rows.Find(txtMaDM.Text);
+                if (row != null)
                 {
-                    MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (ktSanPhamTrongDM(row["MaDM"].ToString()) == false)
+                    {
+                        row.Delete();
+                        MessageBox.Show("Xóa thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Xóa thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Xóa thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                loadCategories();
             }
            
         }
 
         //Thêm danh mục----------------------------
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnThem_Click(object sender, EventArgs e)
         {
-            if (txtCategoryID.Text.Length <= 0 || txtCategoryName.Text.Length <= 0)
+            if (txtMaDM.Text.Length <= 0 || txtTenDM.Text.Length <= 0)
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (checkCateExist(txtCategoryID.Text))
+            if (ktDanhMucDaTonTai(txtMaDM.Text) || dt.Rows.Find(txtMaDM.Text) != null)
             {
                 MessageBox.Show("Danh mục này đã tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             DataRow newRow = dt.NewRow();
-            newRow["MaDM"] = txtCategoryID.Text;
-            newRow["TenDM"] = txtCategoryName.Text;
-
+            newRow["MaDM"] = txtMaDM.Text;
+            newRow["TenDM"] = txtTenDM.Text;
             dt.Rows.Add(newRow);
+            txtMaDM.Clear();
+            txtTenDM.Clear();
 
-            string sqlQuery = "Select * From DanhMuc";
-            int result = dbConnect.updateDataTable(dt, sqlQuery);
-
-            if (result != 1)
-            {
-                MessageBox.Show("Không thể thêm mới.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            loadCategories();
+            btnThem.Enabled = false;
+            btnThem.BackColor = Color.Silver;
+            dataBinding(dt);
+            MessageBox.Show("Thêm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //Sửa danh mục----------------------------
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void btnSua_Click(object sender, EventArgs e)
         {
-            if (txtCategoryID.Text.Length <= 0)
+            if (txtMaDM.Text.Length <= 0)
             {
-                MessageBox.Show("Vui lòng nhập mã danh mục muốn sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vui lòng chọn danh mục muốn sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (checkCateExist(txtCategoryID.Text) == false)
+            DataRow row = dt.Rows.Find(txtMaDM.Text);
+            if (row != null)
             {
-                MessageBox.Show("Danh mục này không tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                row["TenDM"] = txtTenDM.Text;
+                MessageBox.Show("Sửa thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            string sql = "Update DanhMuc Set TenDM = N'" + txtCategoryName.Text + "' Where MaDM = '" + txtCategoryID.Text + "'";
-            int result = dbConnect.getNonQuery(sql);
-
-            if (result != 1)
+            else
             {
                 MessageBox.Show("Không thể sửa.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            loadCategories();
+        }
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            string sql = "Select * From DanhMuc";
+            int kq = dbConnect.updateDataTable(dt, sql);
+
+            if (kq > 0)
+            {
+                MessageBox.Show("Lưu thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Lưu thất bại.", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnThemMoi_Click(object sender, EventArgs e)
+        {
+            txtMaDM.Clear();
+            txtTenDM.Clear();
+            txtMaDM.DataBindings.Clear();
+            txtTenDM.DataBindings.Clear();
+            dgvDanhMuc.ClearSelection();
+
+            btnThem.Enabled = true;
+            btnThem.BackColor = Color.FromArgb(105, 92, 254);
         }
     }
 }

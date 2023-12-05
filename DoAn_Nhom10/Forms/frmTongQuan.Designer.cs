@@ -38,19 +38,19 @@
             System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelOrderCount = new System.Windows.Forms.Label();
+            this.labelTongDH = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.labelEmpCount = new System.Windows.Forms.Label();
+            this.labelTongNV = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.labelProductCount = new System.Windows.Forms.Label();
+            this.labelTongSP = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.labelTotalRevenue = new System.Windows.Forms.Label();
+            this.labelTongDoanhThu = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.labelCusCount = new System.Windows.Forms.Label();
+            this.labelTongKH = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -89,13 +89,13 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(928, 89);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(881, 89);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.labelOrderCount);
+            this.panel1.Controls.Add(this.labelTongDH);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -105,15 +105,15 @@
             this.panel1.Size = new System.Drawing.Size(172, 83);
             this.panel1.TabIndex = 0;
             // 
-            // labelOrderCount
+            // labelTongDH
             // 
-            this.labelOrderCount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOrderCount.Location = new System.Drawing.Point(12, 30);
-            this.labelOrderCount.Name = "labelOrderCount";
-            this.labelOrderCount.Size = new System.Drawing.Size(100, 38);
-            this.labelOrderCount.TabIndex = 1;
-            this.labelOrderCount.Text = "0";
-            this.labelOrderCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTongDH.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTongDH.Location = new System.Drawing.Point(12, 30);
+            this.labelTongDH.Name = "labelTongDH";
+            this.labelTongDH.Size = new System.Drawing.Size(100, 38);
+            this.labelTongDH.TabIndex = 1;
+            this.labelTongDH.Text = "0";
+            this.labelTongDH.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
             // 
@@ -127,7 +127,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
-            this.panel5.Controls.Add(this.labelEmpCount);
+            this.panel5.Controls.Add(this.labelTongNV);
             this.panel5.Controls.Add(this.label10);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(727, 3);
@@ -136,15 +136,15 @@
             this.panel5.Size = new System.Drawing.Size(172, 83);
             this.panel5.TabIndex = 2;
             // 
-            // labelEmpCount
+            // labelTongNV
             // 
-            this.labelEmpCount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEmpCount.Location = new System.Drawing.Point(12, 30);
-            this.labelEmpCount.Name = "labelEmpCount";
-            this.labelEmpCount.Size = new System.Drawing.Size(100, 38);
-            this.labelEmpCount.TabIndex = 1;
-            this.labelEmpCount.Text = "0";
-            this.labelEmpCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTongNV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTongNV.Location = new System.Drawing.Point(12, 30);
+            this.labelTongNV.Name = "labelTongNV";
+            this.labelTongNV.Size = new System.Drawing.Size(100, 38);
+            this.labelTongNV.TabIndex = 1;
+            this.labelTongNV.Text = "0";
+            this.labelTongNV.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label10
             // 
@@ -158,7 +158,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Controls.Add(this.labelProductCount);
+            this.panel4.Controls.Add(this.labelTongSP);
             this.panel4.Controls.Add(this.label8);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(365, 3);
@@ -167,15 +167,15 @@
             this.panel4.Size = new System.Drawing.Size(172, 83);
             this.panel4.TabIndex = 1;
             // 
-            // labelProductCount
+            // labelTongSP
             // 
-            this.labelProductCount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelProductCount.Location = new System.Drawing.Point(12, 30);
-            this.labelProductCount.Name = "labelProductCount";
-            this.labelProductCount.Size = new System.Drawing.Size(100, 38);
-            this.labelProductCount.TabIndex = 1;
-            this.labelProductCount.Text = "0";
-            this.labelProductCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTongSP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTongSP.Location = new System.Drawing.Point(12, 30);
+            this.labelTongSP.Name = "labelTongSP";
+            this.labelTongSP.Size = new System.Drawing.Size(100, 38);
+            this.labelTongSP.TabIndex = 1;
+            this.labelTongSP.Text = "0";
+            this.labelTongSP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label8
             // 
@@ -189,7 +189,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.labelTotalRevenue);
+            this.panel2.Controls.Add(this.labelTongDoanhThu);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(184, 3);
@@ -198,15 +198,15 @@
             this.panel2.Size = new System.Drawing.Size(172, 83);
             this.panel2.TabIndex = 1;
             // 
-            // labelTotalRevenue
+            // labelTongDoanhThu
             // 
-            this.labelTotalRevenue.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalRevenue.Location = new System.Drawing.Point(12, 30);
-            this.labelTotalRevenue.Name = "labelTotalRevenue";
-            this.labelTotalRevenue.Size = new System.Drawing.Size(148, 38);
-            this.labelTotalRevenue.TabIndex = 1;
-            this.labelTotalRevenue.Text = "0";
-            this.labelTotalRevenue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTongDoanhThu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTongDoanhThu.Location = new System.Drawing.Point(12, 30);
+            this.labelTongDoanhThu.Name = "labelTongDoanhThu";
+            this.labelTongDoanhThu.Size = new System.Drawing.Size(148, 38);
+            this.labelTongDoanhThu.TabIndex = 1;
+            this.labelTongDoanhThu.Text = "0";
+            this.labelTongDoanhThu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
@@ -220,7 +220,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.White;
-            this.panel6.Controls.Add(this.labelCusCount);
+            this.panel6.Controls.Add(this.labelTongKH);
             this.panel6.Controls.Add(this.label12);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(546, 3);
@@ -229,15 +229,15 @@
             this.panel6.Size = new System.Drawing.Size(172, 83);
             this.panel6.TabIndex = 3;
             // 
-            // labelCusCount
+            // labelTongKH
             // 
-            this.labelCusCount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCusCount.Location = new System.Drawing.Point(12, 30);
-            this.labelCusCount.Name = "labelCusCount";
-            this.labelCusCount.Size = new System.Drawing.Size(100, 38);
-            this.labelCusCount.TabIndex = 1;
-            this.labelCusCount.Text = "0";
-            this.labelCusCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelTongKH.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTongKH.Location = new System.Drawing.Point(12, 30);
+            this.labelTongKH.Name = "labelTongKH";
+            this.labelTongKH.Size = new System.Drawing.Size(100, 38);
+            this.labelTongKH.TabIndex = 1;
+            this.labelTongKH.Text = "0";
+            this.labelTongKH.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label12
             // 
@@ -262,7 +262,7 @@
             this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(928, 367);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(881, 367);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // chart1
@@ -283,7 +283,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(593, 353);
+            this.chart1.Size = new System.Drawing.Size(563, 353);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             title1.Alignment = System.Drawing.ContentAlignment.TopLeft;
@@ -302,14 +302,14 @@
             legend2.IsTextAutoFit = false;
             legend2.Name = "Legend1";
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(607, 7);
+            this.chart2.Location = new System.Drawing.Point(577, 7);
             this.chart2.Name = "chart2";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chart2.Series.Add(series2);
-            this.chart2.Size = new System.Drawing.Size(318, 353);
+            this.chart2.Size = new System.Drawing.Size(301, 353);
             this.chart2.TabIndex = 1;
             this.chart2.Text = "chart2";
             title2.Alignment = System.Drawing.ContentAlignment.TopLeft;
@@ -323,7 +323,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(948, 538);
+            this.ClientSize = new System.Drawing.Size(901, 505);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -353,22 +353,22 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label labelOrderCount;
+        private System.Windows.Forms.Label labelTongDH;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label labelTotalRevenue;
+        private System.Windows.Forms.Label labelTongDoanhThu;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label labelEmpCount;
+        private System.Windows.Forms.Label labelTongNV;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label labelProductCount;
+        private System.Windows.Forms.Label labelTongSP;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label labelCusCount;
+        private System.Windows.Forms.Label labelTongKH;
         private System.Windows.Forms.Label label12;
     }
 }

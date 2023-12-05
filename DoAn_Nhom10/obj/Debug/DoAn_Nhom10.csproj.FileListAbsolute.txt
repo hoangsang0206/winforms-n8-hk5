@@ -17,4 +17,4 @@ D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.Forms.fr
 D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.Forms.frmNhanVien.resources
 D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.Forms.frmDonHang.resources
 D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.Forms.frmSanPham.resources
-D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.frmDanhNhap.resources
+D:\VS Studio\WinForm_2013\DoAn_Nhom10\DoAn_Nhom10\obj\Debug\DoAn_Nhom10.frmDangNhap.resources
