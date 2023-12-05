@@ -28,7 +28,7 @@ namespace DoAn_Nhom10.Forms
             string sql5 = "Select Count(*) From NhanVien";
 
             labelTongDH.Text = dbConnect.getScalar(sql1).ToString();
-            labelTongDoanhThu.Text = (dbConnect.getSum(sql2) / 1000000 ).ToString("#.##") + " triệu";
+            labelTongDoanhThu.Text = (dbConnect.getSum(sql2) / 1000000 ).ToString() + " triệu";
             labelTongSP.Text = dbConnect.getScalar(sql3).ToString();
             labelTongKH.Text = dbConnect.getScalar(sql4).ToString();
             labelTongNV.Text = dbConnect.getScalar(sql5).ToString();

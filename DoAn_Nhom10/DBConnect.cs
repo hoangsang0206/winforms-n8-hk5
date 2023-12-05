@@ -65,11 +65,11 @@ namespace DoAn_Nhom10
         {
             Open();
             SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnect);
-
-            decimal result = Convert.ToDecimal(cmd.ExecuteScalar());
+            
+            var result = cmd.ExecuteScalar();
 
             Close();
-            return result;
+            return result != null && result != DBNull.Value ? Convert.ToDecimal(result) : 0;
         }
 
         //--

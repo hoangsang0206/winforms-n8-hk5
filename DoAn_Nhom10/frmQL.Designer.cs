@@ -41,7 +41,6 @@
             this.btnCategories = new FontAwesome.Sharp.IconButton();
             this.btnHome = new FontAwesome.Sharp.IconButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.titleLabel = new System.Windows.Forms.Label();
             this.titleIcon = new FontAwesome.Sharp.IconButton();
@@ -49,8 +48,6 @@
             this.panelChildForm = new System.Windows.Forms.TableLayoutPanel();
             this.panelSidebar.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -291,23 +288,12 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(4, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(159, 96);
             this.panel2.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DoAn_Nhom10.Properties.Resources.S_Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(23, 23);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(137, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // panel1
             // 
@@ -388,8 +374,6 @@
             this.Shown += new System.EventHandler(this.frmQL_Shown);
             this.panelSidebar.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -406,7 +390,6 @@
         private System.Windows.Forms.Panel panel1;
         private FontAwesome.Sharp.IconButton titleIcon;
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private FontAwesome.Sharp.IconButton btnLogout;

@@ -15,10 +15,10 @@ namespace DoAn_Nhom10.Forms
         DataTable dtUser = UserLogged.dtUser;
 
         DBConnect dbConnect = new DBConnect();
-        DataTable dt = new DataTable();
-        DataTable dt_product = new DataTable();
-        DataTable dt_import = new DataTable();
-        DataTable dt_impDetail = new DataTable();
+        DataTable dt_PN = new DataTable();
+        DataTable dt_CTPN = new DataTable();
+        DataTable dt_SP = new DataTable();
+        DataColumn[] key = new DataColumn[1];
 
         public frmNhapHang()
         {
@@ -26,88 +26,86 @@ namespace DoAn_Nhom10.Forms
         }
 
         //Load combobox danh mục
-        private void loadCbBoxCategories()
+        private void loadCbBoxDanhMuc()
         {
-            DataTable dtt = new DataTable();
+            DataTable dt = new DataTable();
             string sql = "Select * From DanhMuc";
 
-            dtt = dbConnect.getDataTable(sql);
-            cbboxCategories.DataSource = dtt;
-            cbboxCategories.DisplayMember = "TenDM";
-            cbboxCategories.ValueMember = "MaDM";
+            dt = dbConnect.getDataTable(sql);
+            cbboxDanhMuc.DataSource = dt;
+            cbboxDanhMuc.DisplayMember = "TenDM";
+            cbboxDanhMuc.ValueMember = "MaDM";
         }
 
-        private void AddProductsForm_Load(object sender, EventArgs e)
+        //Load combobox sản phẩm dựa vào mã danh mục
+        private void loadCbBoxSanPham(string maDM)
+        {
+            cbboxSanPham.DataSource = null;
+            string sql = "Select * From SanPham Where MaDM = '" + maDM + "'";
+
+            DataTable dt = new DataTable();
+            dt = dbConnect.getDataTable(sql);
+            cbboxSanPham.DataSource = dt;
+            cbboxSanPham.DisplayMember = "TenSP";
+            cbboxSanPham.ValueMember = "MaSP";
+        }
+
+        private void frmNhapHang_Load(object sender, EventArgs e)
         {
             labelEmpName.Text = dtUser.Rows[0]["TenNV"].ToString();
             labelEmpPhone.Text = dtUser.Rows[0]["SoDT"].ToString();
         }
 
         //Thêm sản phẩm ------------------
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnNhapHang_Click(object sender, EventArgs e)
         {
-            decimal totalPrice = Convert.ToDecimal(txtPriceSum.Text.ToString());
-            DataRow pNewRow = dt_product.NewRow();
-            if (dt_product.Rows.Count <= 0)
+            if (cbboxSanPham.SelectedIndex < 0 || txtSoLuong.Text.Length <= 0 || txtTongTien.Text.Length <= 0)
             {
-                pNewRow["MaSP"] = "SP000001";
+                MessageBox.Show("Dữ liệu không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
+
+            DataRow ctpnNewRow = dt_CTPN.NewRow();
+            ctpnNewRow["MaPN"] = txtMaPN.Text;
+            ctpnNewRow["MaSP"] = cbboxSanPham.SelectedValue.ToString();
+            ctpnNewRow["SoLuong"] = txtSoLuong.Text;
+            ctpnNewRow["GiaNhap"] = txtGiaNhap.Text;
+            dt_CTPN.Rows.Add(ctpnNewRow);
+
+            DataRow row = dt_SP.Rows.Find(ctpnNewRow["MaSP"].ToString());
+            if (row != null)
             {
-                int lasPID = Convert.ToInt32(dt_product.Rows[dt_product.Rows.Count - 1]["MaSP"].ToString().Substring(2, 6));
-                pNewRow["MaSP"] = "SP" + (lasPID + 1).ToString().PadLeft(6, '0');
+                row["GiaBan"] = ctpnNewRow["GiaNhap"];
+                row["SoLuong"] = Convert.ToInt32(row["SoLuong"].ToString()) + Convert.ToInt32(ctpnNewRow["SoLuong"].ToString());
             }
-            pNewRow["TenSP"] = txtProductName.Text;
-            pNewRow["GiaBan"] = txtPrice.Text;
-            pNewRow["ChatLieu"] = txtMaterial.Text;
-            pNewRow["KieuDang"] = txtType.Text;
-            pNewRow["SoLuong"] = txtQuantity.Text;
-            pNewRow["MaDM"] = cbboxCategories.SelectedValue.ToString();
-            dt_product.Rows.Add(pNewRow);
 
-            DataRow impDNewRow = dt_impDetail.NewRow();
-            impDNewRow["MaPN"] = txtImportID.Text;
-            impDNewRow["MaSP"] = pNewRow["MaSP"];
-            impDNewRow["SoLuong"] = txtQuantity.Text;
-            impDNewRow["GiaBan"] = txtPrice.Text;
-            impDNewRow["ThanhTien"] = Convert.ToInt32(txtQuantity.Text) * Convert.ToDecimal(txtPrice.Text);
-            dt_impDetail.Rows.Add(impDNewRow);
+            txtTongTien.Text = ((Convert.ToDecimal(txtTongTien.Text) + 
+                Convert.ToDecimal(ctpnNewRow["GiaNhap"]) * Convert.ToInt32(ctpnNewRow["SoLuong"]))).ToString();
 
-            dt_import.Rows[0]["TongTien"] = txtPriceSum.Text;
-
-            txtPriceSum.Text = (totalPrice + Convert.ToDecimal(txtPrice.Text)).ToString();
-
-            txtProductName.Clear();
-            txtPrice.Clear();
-            txtMaterial.Clear();
-            txtType.Clear();
-            txtQuantity.Clear();
-
-            dgvImportDetail.DataSource = dt_impDetail;
-            dgvImportDetail.Columns["ThanhTien"].Visible = false;
+            txtSoLuong.Clear();
+            txtGiaNhap.Clear();
+            cbboxSanPham.SelectedIndex = -1;
+            dgvChiTietPN.DataSource = dt_CTPN;
         }
 
         //
-        private void btnCreateImport_Click(object sender, EventArgs e)
+        private void btnTaoPN_Click(object sender, EventArgs e)
         {
-            string sql1 = "Select * From SanPham";
-            string sql2 = "Select * From PhieuNhap";
-            dt_product = dbConnect.getDataTable(sql1);
-            dt_import = dbConnect.getDataTable(sql2);
-            dt_impDetail.Columns.Add("MaPN");
-            dt_impDetail.Columns.Add("MaSP");
-            dt_impDetail.Columns.Add("SoLuong");
-            dt_impDetail.Columns.Add("GiaBan");
-            dt_impDetail.Columns.Add("ThanhTien");
+            string sql = "Select * From PhieuNhap";
+            dt_PN = dbConnect.getDataTable(sql);
+            dt_CTPN.Columns.Add("MaPN");
+            dt_CTPN.Columns.Add("MaSP");
+            dt_CTPN.Columns.Add("SoLuong");
+            dt_CTPN.Columns.Add("GiaNhap");
 
-            txtPriceSum.Text = "0";
+            txtTongTien.Text = "0";
             string dateNow = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
-            txtDateImport.Text = dateNow;
+            txtNgayNhap.Text = dateNow;
             string dateNowText = dateNow.Replace("/", "");
 
             DataTable dtt = new DataTable();
-            string sql = "Select Top 1 * From PhieuNhap Where MaPN Like '%" + dateNowText + "%'Order By MaPN Desc";
-            dtt = dbConnect.getDataTable(sql);
+            string sql1 = "Select Top 1 * From PhieuNhap Where MaPN Like '%" + dateNowText + "%'Order By MaPN Desc";
+            dtt = dbConnect.getDataTable(sql1);
             string maPN = "";
 
             if (dtt.Rows.Count <= 0)
@@ -116,7 +114,7 @@ namespace DoAn_Nhom10.Forms
             }
             else
             {
-                string maPNCuoi = dtt.Rows[0]["MAPHIEUNHAP"].ToString();
+                string maPNCuoi = dtt.Rows[0]["MaPN"].ToString();
                 string kituCuoi = maPNCuoi.Substring(10, 3);
                 int soPN = int.Parse(kituCuoi) + 1;
                 string sPN = soPN.ToString().PadLeft(3, '0');
@@ -124,63 +122,90 @@ namespace DoAn_Nhom10.Forms
                 maPN = "PN" + dateNowText + sPN;
             }
 
-            txtImportID.Text = maPN;
-            loadCbBoxCategories();
+            txtMaPN.Text = maPN;
+            loadCbBoxDanhMuc();
+            cbboxDanhMuc.SelectedIndex = -1;
 
-            DataRow newRow = dt_import.NewRow();
-            newRow["MaPN"] = maPN;
-            newRow["NgayNhap"] = DateTime.Now;
-            newRow["MaNV"] = UserLogged.dtUser.Rows[0]["MaNV"].ToString();
-            dt_import.Rows.Add(newRow);
+            string sql2 = "Select * From SanPham";
+            dt_SP = dbConnect.getDataTable(sql2);
+            key[0] = dt_SP.Columns[0];
+            dt_SP.PrimaryKey = key;
 
-            btnCreateImport.Enabled = false;
-            btnCreateImport.BackColor = Color.LightGray;
+            btnTaoPN.Enabled = false;
+            btnTaoPN.BackColor = Color.LightGray;
 
-            btnSaveImport.Enabled = true;
-            btnAdd.Enabled = true;
-            btnSaveImport.BackColor = Color.FromArgb(105, 92, 254);
-            btnAdd.BackColor = Color.FromArgb(105, 92, 254);
+            btnLuuPN.Enabled = true;
+            btnNhapHang.Enabled = true;
+            btnLuuPN.BackColor = Color.FromArgb(105, 92, 254);
+            btnNhapHang.BackColor = Color.FromArgb(10, 148, 50);
         }   
 
         //
-        private void btnSaveImport_Click(object sender, EventArgs e)
+        private void btnLuuPN_Click(object sender, EventArgs e)
         {
-            string sql1 = "Select * From SanPham";
-            string sql2 = "Select * From PhieuNhap";
-            string sql3 = "Select * From ChiTietPN";
+            if (dt_CTPN.Rows.Count <= 0)
+            {
+                MessageBox.Show("Chưa nhập sản phẩm nào.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            dt_impDetail.Columns.Remove("GiaBan");
+            DataRow newRow = dt_PN.NewRow();
+            newRow["MaPN"] = txtMaPN.Text;
+            newRow["NgayNhap"] = DateTime.Now;
+            newRow["MaNV"] = UserLogged.dtUser.Rows[0]["MaNV"].ToString();
+            newRow["TongTien"] = txtTongTien.Text;
+            dt_PN.Rows.Add(newRow);
 
-            dbConnect.updateDataTable(dt_product, sql1);
-            dbConnect.updateDataTable(dt_import, sql2);
-            dbConnect.updateDataTable(dt_impDetail, sql3);
+            string sql1 = "Select * From PhieuNhap";
+            string sql2 = "Select * From ChiTietPN";
+            string sql3 = "Select * From SanPham";
+
+            int kq1 = dbConnect.updateDataTable(dt_PN, sql1);
+            int kq2 = dbConnect.updateDataTable(dt_CTPN, sql2);
+            int kq3 = dbConnect.updateDataTable(dt_SP, sql3);
+
+            if (kq1 != 0 && kq2 != 0 && kq3 != 0)
+            {
+                MessageBox.Show("Lưu phiếu nhập thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            btnHuyPN_Click(btnHuyPN, EventArgs.Empty);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnHuyPN_Click(object sender, EventArgs e)
         {
-            dt_product = new DataTable();
-            dt_import = new DataTable();
-            dt_impDetail = new DataTable();
+            txtMaPN.Clear();
+            txtTongTien.Clear();
+            txtSoLuong.Clear();
+            txtGiaNhap.Clear();
+            txtTongTien.Clear();
+            txtNgayNhap.Clear();
 
-            txtImportID.Clear();
-            txtPriceSum.Clear();
-            txtProductName.Clear();
-            txtPrice.Clear();
-            txtQuantity.Clear();
-            txtType.Clear();
-            txtMaterial.Clear();
-            cbboxCategories.SelectedIndex = -1;
+            cbboxDanhMuc.DataSource = null;
+            cbboxSanPham.DataSource = null;
 
-            btnCreateImport.Enabled = true;
-            btnCreateImport.BackColor = Color.FromArgb(105, 92, 254);
-            btnCreateImport.IconColor = Color.White;
+            btnTaoPN.Enabled = true;
+            btnTaoPN.BackColor = Color.FromArgb(0, 148, 50);
 
-            btnSaveImport.Enabled = false;
-            btnAdd.Enabled = false;
-            btnSaveImport.BackColor = Color.LightGray;
-            btnAdd.BackColor = Color.LightGray;
+            btnLuuPN.Enabled = false;
+            btnNhapHang.Enabled = false;
+            btnLuuPN.BackColor = Color.LightGray;
+            btnNhapHang.BackColor = Color.LightGray;
 
-            dgvImportDetail.DataSource = null;
-        }   
+            dt_CTPN.Rows.Clear();
+
+            dt_PN = new DataTable();
+            dt_CTPN = new DataTable();
+            dt_SP = new DataTable();
+
+        }
+
+        private void cbboxDanhMuc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbboxDanhMuc.SelectedIndex >= 0)
+            {
+                loadCbBoxSanPham(cbboxDanhMuc.SelectedValue.ToString());
+            }
+        }
     }
 }

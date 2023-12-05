@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
 
 namespace DoAn_Nhom10.Forms
 {
@@ -130,12 +131,21 @@ namespace DoAn_Nhom10.Forms
             newRow["MaDM"] = txtMaDM.Text;
             newRow["TenDM"] = txtTenDM.Text;
             dt.Rows.Add(newRow);
+
             txtMaDM.Clear();
             txtTenDM.Clear();
-
+            txtMaDM.ReadOnly = true;
+            txtMaDM.Enabled = false;
             btnThem.Enabled = false;
             btnThem.BackColor = Color.Silver;
             dataBinding(dt);
+
+            btnThemMoi.IconChar = IconChar.PlusSquare;
+            btnThemMoi.BackColor = Color.FromArgb(105, 92, 254);
+            btnThemMoi.IconFont = IconFont.Regular;
+            btnThemMoi.Click -= btnHuy_Click;
+            btnThemMoi.Click += btnThemMoi_Click;
+
             MessageBox.Show("Thêm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -160,6 +170,7 @@ namespace DoAn_Nhom10.Forms
             }
         }
 
+        //--Lưu thay đổi vào CSDL
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string sql = "Select * From DanhMuc";
@@ -175,16 +186,43 @@ namespace DoAn_Nhom10.Forms
             }
         }
 
+        // --------------------
         private void btnThemMoi_Click(object sender, EventArgs e)
         {
             txtMaDM.Clear();
+            txtMaDM.ReadOnly = false;
+            txtMaDM.Enabled = true;
             txtTenDM.Clear();
             txtMaDM.DataBindings.Clear();
             txtTenDM.DataBindings.Clear();
             dgvDanhMuc.ClearSelection();
 
             btnThem.Enabled = true;
-            btnThem.BackColor = Color.FromArgb(105, 92, 254);
+            btnThem.BackColor = Color.FromArgb(0, 148, 50);
+
+            btnThemMoi.IconChar = IconChar.Xmark;
+            btnThemMoi.BackColor = Color.Red;
+            btnThemMoi.IconFont = IconFont.Solid;
+            btnThemMoi.Click += btnHuy_Click;
+
+            btnThemMoi.Click -= btnThemMoi_Click;
+            btnThemMoi.Click += btnHuy_Click;
+        }
+
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            txtMaDM.ReadOnly = true;
+            txtMaDM.Enabled = false;
+            btnThem.Enabled = false;
+            btnThem.BackColor = Color.Silver;
+
+            btnThemMoi.IconChar = IconChar.PlusSquare;
+            btnThemMoi.BackColor = Color.FromArgb(0, 148, 50);
+            btnThemMoi.IconFont = IconFont.Regular;
+            btnThemMoi.Click -= btnHuy_Click;
+            btnThemMoi.Click += btnThemMoi_Click;
+
+            dataBinding(dt);
         }
     }
 }
